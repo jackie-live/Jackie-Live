@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jackie Live</title>
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://jackielive.com/">
+    <meta property="og:title" content="Jackie Live">
+    <meta property="og:description" content="Official site for Jackie Live. Streams, socials, and more.">
+    <meta property="og:image" content="https://i.imgur.com/lgEbUaq.png">
+
+    <link rel="icon" href="favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: "Trebuchet MS", Arial, sans-serif;
+            background: #0E0E0E;
+            color: #F0EDE8;
+            overflow: hidden;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('bg.png'); /* swap in your image */
+            background-size: cover;
+            background-position: center 20%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        /* Dark gradient vignette at the bottom so text is always legible */
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                transparent 40%,
+                rgba(10, 8, 20, 0.72) 75%,
+                rgba(10, 8, 20, 0.92) 100%
+            );
+            pointer-events: none;
+        }
+
+        /* ── Bottom HUD ── */
+        .hud {
+            position: relative;
+            z-index: 10;
+            padding: 0 5% 4% 5%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 18px;
+        }
+
+        /* ── Name ── */
+        .site-title {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: clamp(2.4rem, 6vw, 5rem);
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #F0EDE8;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.9)) drop-shadow(0 0 14px rgba(0,0,0,0.7));
+            line-height: 1;
+        }
+
+        /* ── Icon rows ── */
+        .icon-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .icon-row {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* Thin violet rule between rows */
+        .icon-divider {
+            width: 100%;
+            height: 1px;
+            background: #7B4FFF;
+            opacity: 0.55;
+            margin: 2px 0;
+        }
+
+        /* ── Individual icon button ── */
+        .icon-btn {
+            position: relative;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.12);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #F0EDE8;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: background 0.22s, transform 0.18s;
+            filter: drop-shadow(0 1px 3px rgba(0,0,0,0.7));
+        }
+
+        .icon-btn:hover,
+        .icon-btn:focus-visible {
+            background: #7B4FFF;
+            transform: translateY(-3px);
+            outline: none;
+        }
+
+        /* Donate / tip buttons get a warm accent on hover */
+        .icon-btn.donate:hover,
+        .icon-btn.donate:focus-visible {
+            background: #C0392B;
+        }
+
+        /* ── Tooltip ── */
+        .icon-btn .tip {
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%) translateY(4px);
+            background: rgba(10,8,20,0.9);
+            color: #F0EDE8;
+            font-size: 0.65rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            padding: 3px 7px;
+            border-radius: 3px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.18s, transform 0.18s;
+        }
+
+        .icon-btn:hover .tip,
+        .icon-btn:focus-visible .tip {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ── Copyright ── */
+        .copyright {
+            position: absolute;
+            left: 5%;
+            bottom: 3%;
+            z-index: 10;
+            font-size: 0.72rem;
+            color: rgba(240,237,232,0.55);
+            letter-spacing: 0.04em;
+        }
+
+        .copyright a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .copyright a:hover { text-decoration: underline; }
+
+        /* ── Responsive tweaks ── */
+        @media (max-width: 480px) {
+            .icon-btn { width: 38px; height: 38px; font-size: 0.9rem; }
+            .icon-row { gap: 8px; }
+            .hud { padding-bottom: 6%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+
+        <!-- Bottom-right HUD -->
+        <div class="hud">
+            <h1 class="site-title">Jackie Live</h1>
+
+            <div class="icon-group">
+
+                <!-- Row 1: Content platforms -->
+                <div class="icon-row">
+
+                    <a href="https://www.twitch.tv/JackieUnchained" target="_blank" class="icon-btn" aria-label="Twitch">
+                        <i class="fab fa-twitch"></i>
+                        <span class="tip">Twitch</span>
+                    </a>
+
+                    <a href="https://kick.com/Jackie" target="_blank" class="icon-btn" aria-label="Kick">
+                        <!-- Kick doesn't have an FA icon; use a custom letter mark -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M4 2h4v8l6-8h5L12 11l7.5 11H14l-6-9v9H4V2z"/>
+                        </svg>
+                        <span class="tip">Kick</span>
+                    </a>
+
+                    <a href="https://www.youtube.com/@Jackie_Live" target="_blank" class="icon-btn" aria-label="YouTube">
+                        <i class="fab fa-youtube"></i>
+                        <span class="tip">YouTube</span>
+                    </a>
+
+                    <a href="https://www.tiktok.com/@fhiorre" target="_blank" class="icon-btn" aria-label="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                        <span class="tip">TikTok</span>
+                    </a>
+
+                    <a href="https://www.instagram.com/Jackie.Live" target="_blank" class="icon-btn" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                        <span class="tip">Instagram</span>
+                    </a>
+
+                    <a href="https://x.com/fhiorre" target="_blank" class="icon-btn" aria-label="X / Twitter">
+                        <i class="fab fa-x-twitter"></i>
+                        <span class="tip">X</span>
+                    </a>
+
+                    <a href="https://discord.com/invite/7BWRJqRaY2" target="_blank" class="icon-btn" aria-label="Discord">
+                        <i class="fab fa-discord"></i>
+                        <span class="tip">Discord</span>
+                    </a>
+
+                </div>
+
+                <!-- Divider -->
+                <div class="icon-divider"></div>
+
+                <!-- Row 2: Support / donate -->
+                <div class="icon-row">
+
+                    <a href="https://kickbot.com/tips/Jackie" target="_blank" class="icon-btn donate" aria-label="Donate (Kickbot)">
+                        <i class="fas fa-heart"></i>
+                        <span class="tip">Donate</span>
+                    </a>
+
+                    <a href="https://cash.app/$fhiorre" target="_blank" class="icon-btn donate" aria-label="Cash App">
+                        <i class="fas fa-dollar-sign"></i>
+                        <span class="tip">Cash App</span>
+                    </a>
+
+                    <a href="https://throne.com/jackietv" target="_blank" class="icon-btn donate" aria-label="Throne Wishlist">
+                        <i class="fas fa-gift"></i>
+                        <span class="tip">Throne</span>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom-left copyright -->
+        <p class="copyright">
+            <a href="#" target="_blank">&copy; 2025 Jackie Live</a>
+        </p>
+
+    </div>
+</body>
+</html>
