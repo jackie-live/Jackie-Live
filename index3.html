@@ -172,7 +172,7 @@
         .inset {
             position: absolute;
             top: 3%;
-            left: 3%;
+            right: 3%;
             z-index: 20;
             width: 300px;
             border-radius: 14px;
@@ -297,111 +297,6 @@
 
         .inset.is-live .live-cta { display: flex; }
 
-        /* ── TikTok video container ── */
-        .tiktok-slot {
-            width: 100%;
-            aspect-ratio: 9/16;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            background: #000;
-        }
-
-        .tiktok-slot iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
-            pointer-events: none; /* so clicks pass to our handler */
-        }
-
-        .tiktok-slot .expand-hint {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.2s;
-            background: rgba(0,0,0,0.28);
-        }
-
-        .tiktok-slot:hover .expand-hint {
-            opacity: 1;
-        }
-
-        .expand-hint-inner {
-            background: rgba(10,8,20,0.75);
-            color: #F0EDE8;
-            font-size: 0.6rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            padding: 5px 11px;
-            border-radius: 20px;
-            border: 1px solid rgba(123,79,255,0.5);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* ── Expanded state ── */
-        .inset.is-expanded {
-            top: 0 !important;
-            right: 0 !important;
-            width: 100vw !important;
-            height: 100vh !important;
-            border-radius: 0 !important;
-            z-index: 100;
-            transition: top 0.45s cubic-bezier(.22,.68,0,1.2),
-                        right 0.45s cubic-bezier(.22,.68,0,1.2),
-                        width 0.45s cubic-bezier(.22,.68,0,1.2),
-                        height 0.45s cubic-bezier(.22,.68,0,1.2),
-                        border-radius 0.45s ease;
-        }
-
-        .inset {
-            transition: top 0.45s cubic-bezier(.22,.68,0,1.2),
-                        right 0.45s cubic-bezier(.22,.68,0,1.2),
-                        width 0.45s cubic-bezier(.22,.68,0,1.2),
-                        height 0.45s cubic-bezier(.22,.68,0,1.2),
-                        border-radius 0.45s ease,
-                        border-color 0.4s;
-        }
-
-        .inset.is-expanded .tiktok-slot {
-            aspect-ratio: unset;
-            height: calc(100vh - 36px); /* minus header */
-        }
-
-        .inset.is-expanded .tiktok-slot iframe {
-            pointer-events: auto; /* allow interaction when expanded */
-        }
-
-        .inset.is-expanded .tiktok-slot .expand-hint {
-            display: none;
-        }
-
-        /* Collapse button (visible only when expanded) */
-        .collapse-btn {
-            display: none;
-            position: absolute;
-            top: 6px;
-            left: 10px;
-            background: rgba(10,8,20,0.7);
-            border: 1px solid rgba(123,79,255,0.4);
-            color: #F0EDE8;
-            font-size: 0.6rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            padding: 3px 9px;
-            border-radius: 12px;
-            cursor: pointer;
-            z-index: 5;
-        }
-
-        .inset.is-expanded .collapse-btn { display: block; }
-        .inset.is-expanded .inset-label  { margin-left: 60px; }
-
         /* ── Responsive ── */
         @media (max-width: 900px) {
             .inset { width: 240px; }
@@ -428,7 +323,6 @@
 
         <!-- Header -->
         <div class="inset-header">
-            <button class="collapse-btn" id="collapse-btn" aria-label="Collapse">✕ collapse</button>
             <i class="fab fa-twitch inset-header-icon" id="inset-icon"></i>
             <span class="inset-label" id="inset-label">Sponsored</span>
             <span class="live-pill"><span class="dot"></span>Live</span>
@@ -437,23 +331,38 @@
         <!-- Body -->
         <div class="inset-body">
 
-            <!-- ── TikTok video (default, muted autoplay) ── -->
-            <div class="tiktok-slot" id="tiktok-slot">
-                <iframe
-                    id="tiktok-iframe"
-                    src="https://www.tiktok.com/player/v1/7571170623410490679?autoplay=1&mute=1&loop=1&controls=0&rel=0"
-                    allow="autoplay; fullscreen"
-                    allowfullscreen
-                ></iframe>
-                <div class="expand-hint">
-                    <div class="expand-hint-inner">
-                        <i class="fas fa-expand-alt" style="font-size:0.75rem;"></i>
-                        expand
-                    </div>
+            <!-- ── Ad unit (default) ── -->
+            <!-- Replace the ins tag below with your real AdSense ins tag.
+                 The placeholder keeps layout intact until AdSense is configured. -->
+            <div class="ad-slot" id="ad-slot">
+                <!--
+                    PASTE YOUR ADSENSE <ins> TAG HERE, e.g.:
+                    <ins class="adsbygoogle"
+                         style="display:block;width:300px;height:169px"
+                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXXX"
+                         data-ad-slot="XXXXXXXXXX"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                -->
+
+                <!-- Placeholder shown until AdSense tag is added -->
+                <div style="
+                    width:100%;
+                    aspect-ratio:16/9;
+                    background: rgba(255,255,255,0.04);
+                    display:flex;
+                    flex-direction:column;
+                    align-items:center;
+                    justify-content:center;
+                    gap:8px;
+                    color:rgba(240,237,232,0.2);
+                    font-size:0.65rem;
+                    letter-spacing:0.1em;
+                    text-transform:uppercase;
+                ">
+                    <i class="fas fa-rectangle-ad" style="font-size:1.4rem;"></i>
+                    <span>Ad unit</span>
                 </div>
             </div>
-
-
 
             <!-- ── Twitch live player (hidden until live) ── -->
             <div class="live-player" id="live-player">
@@ -564,6 +473,17 @@
 
     <script>
         // ── Twitch live detection + player swap ────────────────────────────
+        //
+        // Strategy: create a hidden Twitch.Player instance. It fires
+        // Twitch.Player.ONLINE when the channel is live and
+        // Twitch.Player.OFFLINE when it ends. On ONLINE we show the
+        // player (autoplay muted); on OFFLINE we restore the ad.
+        //
+        // The embed SDK requires the page to be served from a registered
+        // domain in the Twitch developer console. For local file:// testing
+        // the player will still load but may show an "embed not allowed"
+        // warning — it works fine on the live domain.
+
         const TWITCH_CHANNEL = 'JackieUnchained';
 
         const inset      = document.getElementById('inset');
@@ -571,6 +491,8 @@
         const insetLabel = document.getElementById('inset-label');
         const insetIcon  = document.getElementById('inset-icon');
 
+        // Create a tiny off-screen div for the player to mount into,
+        // then move its iframe into the visible slot on ONLINE.
         const mountDiv = document.createElement('div');
         mountDiv.style.cssText = 'position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;';
         document.body.appendChild(mountDiv);
@@ -585,9 +507,10 @@
         });
 
         player.addEventListener(Twitch.Player.ONLINE, () => {
+            // Move the iframe into the visible live-player slot
             const iframe = mountDiv.querySelector('iframe');
             if (iframe) {
-                iframe.style.cssText = '';
+                iframe.style.cssText = '';   // clear the hidden styles
                 livePlayer.appendChild(iframe);
             }
             inset.classList.add('is-live');
@@ -595,92 +518,16 @@
             insetIcon.className = 'fab fa-twitch inset-header-icon';
             insetIcon.style.color = '#9146FF';
             insetIcon.style.opacity = '1';
-            // hide tiktok when live
-            const tiktokSlot = document.getElementById('tiktok-slot');
-            if (tiktokSlot) tiktokSlot.style.display = 'none';
         });
 
         player.addEventListener(Twitch.Player.OFFLINE, () => {
+            // Move iframe back to hidden mount, restore ad
             const iframe = livePlayer.querySelector('iframe');
             if (iframe) mountDiv.appendChild(iframe);
             inset.classList.remove('is-live');
             insetLabel.textContent = 'Sponsored';
             insetIcon.style.color = '';
             insetIcon.style.opacity = '0.7';
-            const tiktokSlot = document.getElementById('tiktok-slot');
-            if (tiktokSlot) tiktokSlot.style.display = '';
-        });
-
-        // ── TikTok expand / collapse ───────────────────────────────────────
-        const tiktokSlot = document.getElementById('tiktok-slot');
-        const collapseBtn = document.getElementById('collapse-btn');
-
-        tiktokSlot.addEventListener('click', () => {
-            inset.classList.add('is-expanded');
-            // enable controls when expanded
-            const iframe = document.getElementById('tiktok-iframe');
-            if (iframe) {
-                iframe.src = 'https://www.tiktok.com/player/v1/7571170623410490679?autoplay=1&mute=1&loop=1&controls=1&rel=0';
-            }
-        });
-
-        collapseBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            inset.classList.remove('is-expanded');
-            // restore minimal controls
-            const iframe = document.getElementById('tiktok-iframe');
-            if (iframe) {
-                iframe.src = 'https://www.tiktok.com/player/v1/7571170623410490679?autoplay=1&mute=1&loop=1&controls=0&rel=0';
-            }
-        });
-
-        // Close on Escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && inset.classList.contains('is-expanded')) {
-                collapseBtn.click();
-            }
-        });
-
-        // ── Cursor-driven shadow effects ───────────────────────────────────
-        //
-        // Moves a soft directional drop-shadow on the site title + icon buttons
-        // based on cursor position relative to center of the viewport,
-        // as if there's a light source tracking the mouse.
-
-        const siteTitle = document.querySelector('.site-title');
-        const iconBtns  = document.querySelectorAll('.icon-btn');
-
-        document.addEventListener('mousemove', (e) => {
-            const cx = window.innerWidth  / 2;
-            const cy = window.innerHeight / 2;
-            const dx = (e.clientX - cx) / cx;   // -1 … +1
-            const dy = (e.clientY - cy) / cy;
-
-            // Shadow offset: opposite direction of cursor (light source effect)
-            const ox = (-dx * 14).toFixed(1);
-            const oy = (-dy * 14).toFixed(1);
-            const dist = Math.hypot(dx, dy);       // 0 … ~1.41
-            const blur = (8 + dist * 18).toFixed(1);
-
-            // Title — warm glow color shifts subtly toward cursor quadrant
-            const r = Math.round(80 + dx * 40);
-            const g = Math.round(50 + dy * 20);
-            const b = Math.round(180 + dist * 60);
-
-            siteTitle.style.filter =
-                `drop-shadow(${ox}px ${oy}px ${blur}px rgba(0,0,0,0.95)) ` +
-                `drop-shadow(0 0 ${(20 + dist*28).toFixed(0)}px rgba(${r},${g},${b},0.22))`;
-
-            // Icon buttons — subtle glow pointing away from cursor
-            const iconGlow = `drop-shadow(${(ox*0.5).toFixed(1)}px ${(oy*0.5).toFixed(1)}px ${(4+dist*8).toFixed(1)}px rgba(0,0,0,0.8))`;
-            iconBtns.forEach(btn => { btn.style.filter = iconGlow; });
-
-            // Inset panel — faint parallax shadow
-            if (!inset.classList.contains('is-expanded')) {
-                inset.style.boxShadow =
-                    `${(ox*0.6).toFixed(1)}px ${(oy*0.6).toFixed(1)}px ${(24+dist*20).toFixed(0)}px rgba(0,0,0,0.7), ` +
-                    `0 0 ${(30+dist*30).toFixed(0)}px rgba(123,79,255,${(0.05+dist*0.12).toFixed(2)})`;
-            }
         });
     </script>
 
